@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wunden-Übersicht</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <h1>Wunden-Übersicht</h1>
+  <div class="muted">Rechtsklick auf ein Heldentoken → <b>Wunden</b></div>
+
+  <h2>Helden in dieser Szene</h2>
+  <div id="heroes"></div>
+
+  <h2>Todesgrenze</h2>
+  <div class="row" style="align-items:center">
+    <label for="max" class="muted" style="flex:1">Ab wie vielen Wunden liegt ein Held am Boden?</label>
+    <select id="max" style="width:80px">
+      <option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+    </select>
+  </div>
+
+  <h2>Regeln für den Tisch</h2>
+  <div class="rules" id="rules"></div>
+
+  <h2>Aufräumen</h2>
+  <button id="healall" class="ok">Alle Helden in dieser Szene voll heilen</button>
+  <div class="confirm" id="confirm">
+    <button id="yes" class="primary">Ja, alle heilen</button>
+    <button id="no">Abbrechen</button>
+  </div>
+
+  <script type="module" src="./panel.js"></script>
+</body>
+</html>

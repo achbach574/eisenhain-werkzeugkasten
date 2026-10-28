@@ -1,0 +1,16 @@
+{
+  "name": "Eisenhain-Werkzeugkasten",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "description": "Kampfwunden als Todesanzeige für Heldentokens: Herzen, farbiger Ring, Wundenschild und Bildtausch.",
+  "author": "Alex",
+  "icon": "icons/logo.svg",
+  "background_url": "background.html",
+  "action": {
+    "title": "Wunden-Übersicht",
+    "icon": "icons/wunde.svg",
+    "popover": "panel.html",
+    "width": 440,
+    "height": 640
+  }
+}

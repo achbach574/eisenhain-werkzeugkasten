@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wunden</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="row" style="justify-content:space-between;align-items:center">
+    <h1 id="name">…</h1>
+    <button class="small" id="close" aria-label="Schließen">✕</button>
+  </div>
+  <div class="status">
+    <span class="hearts" id="hearts"></span>
+    <span class="badge" id="badge"></span>
+  </div>
+
+  <h2>Aktuelle Wunden</h2>
+  <div id="current"></div>
+
+  <h2>Wunde zufügen</h2>
+  <div class="catalog" id="catalog"></div>
+
+  <h2>Eigene Wunde</h2>
+  <input id="cname" maxlength="40" placeholder="Name, z. B. Schnauzer angesengt">
+  <div class="row" style="margin-top:6px">
+    <input id="ceffect" maxlength="200" placeholder="Wirkung im Spiel">
+    <button class="primary" id="cadd" style="flex:none">+</button>
+  </div>
+
+  <script type="module" src="./wunden.js"></script>
+</body>
+</html>

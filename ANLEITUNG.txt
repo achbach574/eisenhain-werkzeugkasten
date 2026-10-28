@@ -1,0 +1,40 @@
+EISENHAIN-WERKZEUGKASTEN – Owlbear-Erweiterung für Kampfwunden
+==============================================================
+
+EINMALIG EINRICHTEN (ca. 15 Minuten)
+
+1. Auf github.com ein kostenloses Konto anlegen und einloggen.
+2. Oben rechts auf "+" → "New repository".
+   Name: eisenhain-werkzeugkasten   ·   Sichtbarkeit: Public   ·   "Create repository".
+3. Auf der neuen Seite den Link "uploading an existing file" anklicken.
+4. ALLE Dateien und Ordner aus diesem Ordner (nicht den Ordner selbst!) in das Fenster ziehen:
+   manifest.json, background.html, background.js, core.js, actions.js, wunden.html, wunden.js,
+   panel.html, panel.js, style.css sowie die Ordner "icons" und "vendor".
+   Danach unten auf "Commit changes".
+5. Im Repository oben auf "Settings" → links "Pages".
+   Bei "Branch" "main" und "/ (root)" wählen → "Save".
+   Nach 1–2 Minuten erscheint oben die Adresse, z. B.
+   https://DEINNAME.github.io/eisenhain-werkzeugkasten/
+6. Deine Erweiterungsadresse ist diese Adresse plus "manifest.json":
+   https://DEINNAME.github.io/eisenhain-werkzeugkasten/manifest.json
+   Zum Test im Browser öffnen: Es muss Text mit "Eisenhain-Werkzeugkasten" erscheinen.
+7. In Owlbear Rodeo: Profil → Extensions → "Add Custom Extension" → Adresse aus Schritt 6 einfügen.
+8. Im Raum über das Erweiterungsmenü den Werkzeugkasten für diesen Raum einschalten.
+
+IM SPIEL
+
+- Rechtsklick auf ein Heldentoken (Ebene "Character") → "Wunden".
+  Dort Wunden aus dem Katalog zufügen, eigene Wunden anlegen, einzelne Wunden heilen.
+- Rechtsklick → "Eine Wunde heilen" heilt die zuletzt zugefügte Wunde (geht auch bei mehreren Tokens).
+- Am Token erscheinen ein farbiger Ring und ein Schild mit Herzen und Wundnamen:
+  gelb = angeschlagen · orange = verwundet · rot = kritisch · schwarz/rot = am Boden (Token kippt um).
+- Wundbild: Beim Knopf 🖼️ neben einer Wunde wählst du ein Bild aus deinen Owlbear-Uploads
+  (z. B. Tom mit nur einem Arm). Solange die Wunde besteht, zeigt das Token dieses Bild.
+  Beim Heilen kommt das Originalbild zurück.
+- Oben in der Werkzeugleiste: Herz-Symbol = Wunden-Übersicht für den Fernseher,
+  Todesgrenze (2–6 Wunden) und "Alle voll heilen".
+
+HINWEISE
+- Nur die Spielleitung (GM) sieht die Rechtsklick-Menüs.
+- Die Wunden hängen am Token. Kopierst du ein Token, kopierst du seine Wunden mit.
+- Wenn du Dateien änderst, lädst du sie einfach erneut auf GitHub hoch.
