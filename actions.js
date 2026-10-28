@@ -81,20 +81,34 @@ export async function renderVisuals(tokenIds) {
     if (!count) continue;
     const stage = stageFor(count, maxWounds);
     const b = await OBR.scene.items.getItemBounds([t.id]);
-    const diameter = Math.min(b.width, b.height) * 1.04;
     const meta = (kind) => ({ [VISUAL_KEY]: { owner: t.id, kind } });
+    // Stehende Figur (hochkant): flacher Ring an den Füßen. Sonst: Ring um das Token.
+    const figure = b.height > b.width * 1.3;
+    let ringW, ringH, ringPos, size;
+    if (figure) {
+      ringW = Math.max(b.width * 1.15, b.height * 0.4);
+      ringH = ringW * 0.38;
+      ringPos = { x: b.center.x, y: b.max.y - ringH * 0.35 };
+      size = b.height;
+    } else {
+      ringW = ringH = Math.min(b.width, b.height) * 1.04;
+      ringPos = b.center;
+      size = Math.min(b.width, b.height) * 1.6;
+    }
+    const heavy = stage.id === "critical" || stage.id === "down";
+    const fs = Math.min(36, Math.max(5, size * 0.07));
 
     toAdd.push(
       buildShape()
         .shapeType("CIRCLE")
-        .width(diameter)
-        .height(diameter)
-        .position(b.center)
+        .width(ringW)
+        .height(ringH)
+        .position(ringPos)
         .fillColor(stage.ring)
-        .fillOpacity(stage.id === "down" ? 0.35 : 0)
+        .fillOpacity(stage.id === "down" ? 0.35 : 0.12)
         .strokeColor(stage.id === "down" ? "#b71c1c" : stage.ring)
         .strokeOpacity(1)
-        .strokeWidth(Math.max(6, dpi * (stage.id === "critical" || stage.id === "down" ? 0.09 : 0.06)))
+        .strokeWidth(Math.max(1.5, ringW * (heavy ? 0.06 : 0.04)))
         .attachedTo(t.id)
         .layer("ATTACHMENT")
         .locked(true)
@@ -109,18 +123,18 @@ export async function renderVisuals(tokenIds) {
     toAdd.push(
       buildLabel()
         .plainText(labelText(state, maxWounds))
-        .position({ x: b.center.x, y: b.max.y + dpi * 0.06 })
+        .position({ x: b.center.x, y: b.max.y + fs * 0.3 })
         .pointerDirection("UP")
-        .pointerHeight(6)
-        .pointerWidth(12)
+        .pointerHeight(fs * 0.3)
+        .pointerWidth(fs * 0.6)
         .backgroundColor(stage.bg)
         .backgroundOpacity(0.92)
         .fillColor("#ffffff")
         .fontWeight(700)
-        .fontSize(22)
-        .lineHeight(1.25)
-        .padding(8)
-        .cornerRadius(10)
+        .fontSize(fs)
+        .lineHeight(1.2)
+        .padding(fs * 0.35)
+        .cornerRadius(fs * 0.4)
         .textAlign("CENTER")
         .attachedTo(t.id)
         .layer("ATTACHMENT")
