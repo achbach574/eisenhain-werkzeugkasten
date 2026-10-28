@@ -2,7 +2,7 @@
   "name": "Eisenhain-Werkzeugkasten",
   "version": "2.0.0",
   "manifest_version": 1,
-  "description": "Werkzeugkasten für „Die gestohlenen Gewichte von Eisenhain“: Wunden, Spielstand, Fließband, Würfel, Shake-Roulette, Goblins, Handout-Projektor, Spielleiter-Skript und Finale.",
+  "description": "Eisenhain-Abenteuer: Wunden, Spielstand, Fließband, Würfel, Shakes, Goblins, Handouts, Skript und Finale.",
   "author": "Alex",
   "icon": "/eisenhain-werkzeugkasten/icons/logo.svg",
   "background_url": "/eisenhain-werkzeugkasten/background.html",
