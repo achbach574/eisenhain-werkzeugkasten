@@ -1,8 +1,8 @@
-import OBR, { buildShape, buildLabel } from "./vendor/obr-sdk.js?v=3";
+import OBR, { buildShape, buildLabel } from "./vendor/obr-sdk.js?v=5";
 import {
   WOUNDS_KEY, VISUAL_KEY, SETTINGS_KEY, DEFAULT_SETTINGS,
   clampMax, stageFor, readState, labelText, makeWound, applyStateToToken,
-} from "./core.js?v=3";
+} from "./core.js?v=5";
 
 export async function getSettings() {
   const meta = await OBR.room.getMetadata();

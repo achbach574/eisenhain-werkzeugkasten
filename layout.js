@@ -1,6 +1,6 @@
 // Szenen-Baukasten: Tokens per Befehl relativ zur Karte platzieren.
 // Koordinaten: x/y = Mittelpunkt als Anteil der Karte (0 bis 1), h = Höhe als Anteil der Kartenhöhe, w = Breite als Anteil der Kartenbreite.
-import OBR, { buildImage } from "./vendor/obr-sdk.js?v=3";
+import OBR, { buildImage } from "./vendor/obr-sdk.js?v=5";
 
 const LAYERS = ["PROP", "MOUNT", "CHARACTER", "NOTE"];
 const nameOf = (i) => (i.name || "").trim();
@@ -47,7 +47,7 @@ function matches(item, query) {
 }
 
 /** Wendet Größe, Lage und Eigenschaften auf ein Item (oder einen Immer-Entwurf) an. */
-function applyTo(d, c, mb, sdpi) {
+export function applyTo(d, c, mb, sdpi) {
   const baseH = (d.image.height / d.grid.dpi) * sdpi;
   const baseW = (d.image.width / d.grid.dpi) * sdpi;
   let s = null;

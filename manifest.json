@@ -1,16 +1,16 @@
 {
   "name": "Eisenhain-Werkzeugkasten",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "manifest_version": 1,
-  "description": "Kampfwunden als Todesanzeige für Heldentokens: Herzen, farbiger Ring, Wundenschild und Bildtausch.",
+  "description": "Werkzeugkasten für „Die gestohlenen Gewichte von Eisenhain“: Wunden, Spielstand, Fließband, Würfel, Shake-Roulette, Goblins, Handout-Projektor, Spielleiter-Skript und Finale.",
   "author": "Alex",
   "icon": "/eisenhain-werkzeugkasten/icons/logo.svg",
   "background_url": "/eisenhain-werkzeugkasten/background.html",
   "action": {
-    "title": "Wunden-Übersicht",
+    "title": "Eisenhain-Werkzeugkasten",
     "icon": "/eisenhain-werkzeugkasten/icons/wunde.svg",
     "popover": "/eisenhain-werkzeugkasten/panel.html",
-    "width": 440,
-    "height": 640
+    "width": 460,
+    "height": 720
   }
 }

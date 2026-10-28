@@ -3,14 +3,130 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Wunden-Übersicht</title>
-  <link rel="stylesheet" href="./style.css?v=3">
+  <title>Eisenhain-Werkzeugkasten</title>
+  <link rel="stylesheet" href="./style.css?v=5">
 </head>
 <body>
-  <div class="row" style="margin-bottom:10px">
+  <div class="tabs">
     <button id="tabW" class="tab active">Wunden</button>
-    <button id="tabS" class="tab">Szenen-Baukasten</button>
+    <button id="tabG" class="tab">Spiel</button>
+    <button id="tabD" class="tab">Würfel</button>
+    <button id="tabK" class="tab">Skript</button>
+    <button id="tabF" class="tab">Finale</button>
+    <button id="tabS" class="tab">Bau</button>
   </div>
+  <button id="ovClose" class="small closebar">✕ Großanzeige vom Fernseher nehmen</button>
+
+  <!-- ===== Spielstand und Fließband ===== -->
+  <section id="secG" hidden>
+    <h1>Fließband</h1>
+    <div class="muted">Szene 8. Stapel-Tokens heißen „01 …“ bis „05 …“. Rechtsklick auf einen Stapel: <b>Stapel gerettet!</b> oder <b>Zurück aufs Band</b>.</div>
+    <button id="beltNext" class="primary big" style="margin-top:8px">Runde vorbei: Band rückt vor ▶</button>
+    <div class="row" style="margin-top:6px">
+      <button id="beltBack" style="flex:1">◀ Rückwärts (Shaker)</button>
+      <button id="beltReset" style="flex:1">Band neu aufbauen</button>
+    </div>
+    <div class="rules" id="beltMsg" style="margin-top:6px">Bereit.</div>
+
+    <h2>Stampfhammer stoppen</h2>
+    <div class="steps" id="hammer">
+      <label><input type="checkbox" data-h="1"> 1 Dampfventil</label>
+      <label><input type="checkbox" data-h="2"> 2 Kette</label>
+      <label><input type="checkbox" data-h="3"> 3 Hebel</label>
+    </div>
+
+    <h2>Spielstand</h2>
+    <div class="grid2">
+      <span class="muted">Szene 7, die Halle</span>
+      <div class="seg" id="segHalle"><button data-v="1">befreit</button><button data-v="0">durchgerannt</button></div>
+      <span class="muted">Rita Reps</span>
+      <div class="seg" id="segRita"><button data-v="offen">offen</button><button data-v="umgedreht">umgedreht</button><button data-v="geflohen">geflohen</button></div>
+      <span class="muted">Stürze ins Netz (Sz. 10)</span>
+      <div class="row" style="align-items:center"><button id="stMinus" class="small">−</button><b id="stNum" style="min-width:24px;text-align:center">0</b><button id="stPlus" class="small">+</button></div>
+    </div>
+    <div id="stackList" style="margin-top:8px"></div>
+
+    <h2>Folgen für später</h2>
+    <div class="rules" id="folgen"></div>
+
+    <h2>Automatisch ein- und ausblenden</h2>
+    <div class="rules">Schreib ein Schildchen in den <b>Namen</b> eines Tokens, dann blendet der Werkzeugkasten es passend zum Spielstand ein oder aus:<br>
+      <code>[wenn rita]</code> Rita umgedreht · <code>[wenn geflohen]</code> · <code>[wenn halle]</code> · <code>[wenn durchgerannt]</code><br>
+      <code>[wenn alle]</code> 5 Stapel · <code>[wenn einige]</code> 3–4 · <code>[wenn wenige]</code> 0–2 · <code>[wenn hammer]</code><br>
+      <code>[wenn kinderecke]</code> bzw. <code>[wenn hilde]</code>, <code>[wenn bert]</code> … Stapel gerettet · <code>[wenn !kinderecke]</code> nicht gerettet<br>
+      <code>[ab takt 4]</code> erscheint, sobald der Countdown bei 4 oder darunter ist.</div>
+    <div class="row" style="margin-top:6px">
+      <button id="tagsNow" style="flex:1">Jetzt anwenden</button>
+      <button id="spielReset" style="flex:1">Spielstand zurücksetzen</button>
+    </div>
+  </section>
+
+  <!-- ===== Würfel ===== -->
+  <section id="secD" hidden>
+    <div class="who-bar">Wer würfelt? <b id="dWho">niemand ausgewählt</b></div>
+    <button id="d20" class="d20btn" title="W20 werfen">
+      <svg viewBox="-100 -100 200 200" aria-hidden="true"><polygon points="0,-95 82.3,-47.5 82.3,47.5 0,95 -82.3,47.5 -82.3,-47.5" fill="#55504a" stroke="#1b1612" stroke-width="5"/><polygon points="0,-50 43.3,25 -43.3,25" fill="#8a8178" stroke="#1b1612" stroke-width="4"/><path d="M0,-50 0,-95 M43.3,25 82.3,-47.5 M43.3,25 82.3,47.5 M43.3,25 0,95 M-43.3,25 0,95 M-43.3,25 -82.3,47.5 M-43.3,25 -82.3,-47.5 M0,-50 -82.3,-47.5 M0,-50 82.3,-47.5" stroke="#1b1612" stroke-width="4"/><text x="0" y="16" text-anchor="middle" font-size="40" font-weight="900" fill="#f6e7c4" font-family="Georgia,serif">20</text></svg>
+      <span>W20 werfen</span>
+    </button>
+    <div class="row" style="margin-top:6px">
+      <button id="dAdv" class="ok" style="flex:1;text-align:center">Mit Vorteil</button>
+      <button id="dDis" class="primary" style="flex:1;text-align:center">Mit Nachteil</button>
+    </div>
+    <h2>Schwierigkeit</h2>
+    <div class="seg" id="segDc"><button data-v="0">keine</button><button data-v="8">leicht 8</button><button data-v="12">normal 12</button><button data-v="16">schwer 16</button><button data-v="20">20</button></div>
+    <div class="row" style="margin-top:6px;align-items:center">
+      <label for="dMod" class="muted" style="flex:1">Bonus (Gegenstand, Hilfe, Name gerufen …)</label>
+      <select id="dMod" style="width:80px"><option>-2</option><option>-1</option><option selected>0</option><option>+1</option><option>+2</option><option>+3</option><option>+5</option></select>
+    </div>
+    <h2>Andere Würfel</h2>
+    <div class="dice-row" id="others">
+      <button data-s="4">W4</button><button data-s="6">W6</button><button data-s="8">W8</button><button data-s="10">W10</button><button data-s="12">W12</button><button data-s="100">W100</button>
+    </div>
+    <div class="row" style="margin-top:6px;align-items:center">
+      <label for="dCount" class="muted" style="flex:1">Anzahl (z. B. 2W6)</label>
+      <select id="dCount" style="width:80px"><option>1</option><option>2</option><option>3</option></select>
+    </div>
+    <h2>Shake-Roulette</h2>
+    <button id="dShake" class="shakebtn">🥤 Shake trinken (W6)</button>
+    <div class="muted" style="margin-top:4px">Der Effekt hängt danach als Schild am Helden. Rechtsklick → <b>Shake-Effekt beenden</b>.</div>
+    <h2>Letzte Würfe</h2>
+    <div id="dLog" class="out" style="min-height:24px"></div>
+  </section>
+
+  <!-- ===== Skript ===== -->
+  <section id="secK" hidden>
+    <div class="row" style="align-items:center">
+      <select id="kScene" style="flex:1"></select>
+      <button id="kBig" class="small" title="Schrift größer">A+</button>
+    </div>
+    <div class="muted" style="margin:4px 0">Wird für diese Owlbear-Szene gemerkt.</div>
+    <div class="chips" id="kChips"></div>
+    <div id="kBody" class="skript"></div>
+  </section>
+
+  <section id="secF" hidden>
+    <h1>Countdown</h1>
+    <div class="status" style="justify-content:space-between">
+      <span id="cdNum" style="font-size:44px;font-weight:800;color:#ff5a3c;line-height:1">–</span>
+      <div class="row">
+        <button id="cdMinus" class="primary" style="font-size:18px;padding:10px 16px">Dong! −1</button>
+        <button id="cdPlus">+1</button>
+      </div>
+    </div>
+    <div class="rules" id="cdEvent" style="margin-top:8px">Noch kein Countdown in dieser Szene.</div>
+    <h2>Start</h2>
+    <div class="row" style="align-items:center">
+      <label for="cdStart" class="muted" style="flex:1" id="cdHint">Startwert laut Spielstand</label>
+      <select id="cdStart" style="width:70px"><option>8</option><option>7</option><option>6</option><option>5</option><option>4</option></select>
+    </div>
+    <div class="row" style="margin-top:6px">
+      <button id="cdPlace" class="ok">Countdown setzen / zurücksetzen</button>
+      <button id="cdRemove">Entfernen</button>
+    </div>
+    <h2>Herzpunkte</h2>
+    <div class="muted">Rechtsklick auf Karl → <b>Herzpunkt geben</b> oder <b>Herzpunkt wegnehmen</b>. Bei 3 von 3 bleibt Karl stehen.</div>
+    <div id="herzList" style="margin-top:6px"></div>
+  </section>
 
   <section id="secS" hidden>
     <h1>Szenen-Baukasten</h1>
@@ -52,6 +168,6 @@
 
   </section>
 
-  <script type="module" src="./panel.js?v=3"></script>
+  <script type="module" src="./panel.js?v=5"></script>
 </body>
 </html>

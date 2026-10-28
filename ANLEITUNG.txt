@@ -38,3 +38,18 @@ HINWEISE
 - Nur die Spielleitung (GM) sieht die Rechtsklick-Menüs.
 - Die Wunden hängen am Token. Kopierst du ein Token, kopierst du seine Wunden mit.
 - Wenn du Dateien änderst, lädst du sie einfach erneut auf GitHub hoch.
+
+NEU IN VERSION 2.0
+==================
+Reiter „Spiel“: Spielstand (Halle, Rita, Stürze, Stapel), Fließband für Szene 8
+  („Runde vorbei“, „Rückwärts“, „Band neu aufbauen“), Stampfhammer in drei Schritten
+  und die Folgen für spätere Szenen. Schildchen im Token-Namen wie [wenn rita] oder
+  [ab takt 4] blenden Tokens automatisch ein und aus.
+Reiter „Würfel“: eiserner W20 mit Vorteil/Nachteil, Schwierigkeit und Bonus,
+  dazu W4 bis W100 und das Shake-Roulette. Das Ergebnis erscheint groß auf dem Fernseher.
+Reiter „Skript“: Vorlesetexte und Mechaniken der Szenen 8 bis 13.
+Rechtsklick auf einen Stapel: „Stapel gerettet!“ und „Zurück aufs Band“.
+Rechtsklick auf einen Goblin: „Goblin-Aktionen“ mit Spruch, Aktion und Wunde.
+Rechtsklick auf einen Helden: „Shake trinken (W6)“.
+Rechtsklick auf ein Handout (Ebene Prop): „Auf dem Fernseher zeigen“. Tagebuch 1 bis 4
+  werden automatisch zu einem Heft zum Umblättern.
