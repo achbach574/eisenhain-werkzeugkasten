@@ -1,6 +1,7 @@
-import OBR from "./vendor/obr-sdk.js";
-import { WOUNDS_KEY, readState, stageFor, hearts } from "./core.js";
-import { getSettings, setSettings, rerenderAll, healAll, escapeHtml } from "./actions.js";
+import OBR from "./vendor/obr-sdk.js?v=3";
+import { WOUNDS_KEY, readState, stageFor, hearts } from "./core.js?v=3";
+import { getSettings, setSettings, rerenderAll, healAll, escapeHtml } from "./actions.js?v=3";
+import { readScene, runCommands } from "./layout.js?v=3";
 
 const $ = (id) => document.getElementById(id);
 
@@ -68,4 +69,31 @@ OBR.onReady(() => {
   OBR.scene.onReadyChange(() => render());
   OBR.scene.items.onChange(() => render());
   OBR.room.onMetadataChange(() => render());
+});
+
+// ---- Szenen-Baukasten ----
+const show = (s) => {
+  $("secW").hidden = s !== "W"; $("secS").hidden = s !== "S";
+  $("tabW").classList.toggle("active", s === "W"); $("tabS").classList.toggle("active", s === "S");
+};
+$("tabW").addEventListener("click", () => show("W"));
+$("tabS").addEventListener("click", () => show("S"));
+
+$("read").addEventListener("click", async () => {
+  try {
+    const rows = await readScene();
+    $("out").textContent = rows.map((r) =>
+      `${r.name}${r.label ? ` [${r.label}]` : ""} · ${r.layer} · x ${r.x} y ${r.y} h ${r.h}`).join("\n") || "Keine Tokens.";
+  } catch (e) { $("out").textContent = "Fehler: " + (e.message || e); }
+});
+
+$("run").addEventListener("click", async () => {
+  let cmds;
+  try { cmds = JSON.parse($("cmds").value); }
+  catch (e) { $("out").textContent = "Befehle sind kein gültiges JSON: " + e.message; return; }
+  $("out").textContent = "Läuft …";
+  try {
+    const log = await runCommands(cmds);
+    $("out").textContent = log.join("\n");
+  } catch (e) { $("out").textContent = "Fehler: " + (e.message || e); }
 });

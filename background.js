@@ -1,6 +1,6 @@
-import OBR from "./vendor/obr-sdk.js";
-import { ID, WOUNDS_KEY } from "./core.js";
-import { healWound } from "./actions.js";
+import OBR from "./vendor/obr-sdk.js?v=3";
+import { ID, WOUNDS_KEY } from "./core.js?v=3";
+import { healWound } from "./actions.js?v=3";
 
 const here = (p) => new URL(p, window.location.href).href;
 

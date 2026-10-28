@@ -67,3 +67,14 @@ input, select {
 .rules b { color: var(--text); }
 .confirm { display: none; gap: 6px; margin-top: 6px; }
 .confirm.show { display: flex; }
+.tab { flex: 1; text-align: center; }
+.tab.active { background: #6d1b1b; border-color: #8b2a2a; }
+textarea {
+  font: 13px/1.4 ui-monospace, Consolas, monospace; color: var(--text); background: var(--panel);
+  border: 1px solid var(--line); border-radius: 8px; padding: 8px; width: 100%; resize: vertical;
+}
+.out {
+  font: 12px/1.45 ui-monospace, Consolas, monospace; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 8px; padding: 8px; white-space: pre-wrap; word-break: break-word; min-height: 40px; max-height: 260px; overflow: auto;
+  user-select: text;
+}

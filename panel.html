@@ -4,9 +4,28 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Wunden-Übersicht</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=3">
 </head>
 <body>
+  <div class="row" style="margin-bottom:10px">
+    <button id="tabW" class="tab active">Wunden</button>
+    <button id="tabS" class="tab">Szenen-Baukasten</button>
+  </div>
+
+  <section id="secS" hidden>
+    <h1>Szenen-Baukasten</h1>
+    <div class="muted">Platziert Tokens per Befehl relativ zur Karte. x/y = Mitte (0–1), h = Höhe als Anteil der Kartenhöhe.</div>
+    <h2>Befehle</h2>
+    <textarea id="cmds" rows="7" spellcheck="false" placeholder='[{"name":"Rita Reps","x":0.84,"y":0.12,"h":0.16}]'></textarea>
+    <div class="row" style="margin-top:6px">
+      <button id="run" class="primary">Ausführen</button>
+      <button id="read">Szene auslesen</button>
+    </div>
+    <h2>Ausgabe</h2>
+    <pre id="out" class="out"></pre>
+  </section>
+
+  <section id="secW">
   <h1>Wunden-Übersicht</h1>
   <div class="muted">Rechtsklick auf ein Heldentoken → <b>Wunden</b></div>
 
@@ -31,6 +50,8 @@
     <button id="no">Abbrechen</button>
   </div>
 
-  <script type="module" src="./panel.js"></script>
+  </section>
+
+  <script type="module" src="./panel.js?v=3"></script>
 </body>
 </html>

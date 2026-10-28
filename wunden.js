@@ -1,6 +1,6 @@
-import OBR from "./vendor/obr-sdk.js";
-import { ID, CATALOG, readState, stageFor, hearts } from "./core.js";
-import { getSettings, addWound, healWound, setVariant, escapeHtml } from "./actions.js";
+import OBR from "./vendor/obr-sdk.js?v=3";
+import { ID, CATALOG, readState, stageFor, hearts } from "./core.js?v=3";
+import { getSettings, addWound, healWound, setVariant, escapeHtml } from "./actions.js?v=3";
 
 const tokenId = new URLSearchParams(location.search).get("id");
 const $ = (id) => document.getElementById(id);
