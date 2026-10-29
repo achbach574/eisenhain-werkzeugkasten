@@ -1,15 +1,16 @@
-import OBR from "./vendor/obr-sdk.js?v=5";
-import { WOUNDS_KEY, readState, stageFor, hearts } from "./core.js?v=5";
-import { getSettings, setSettings, rerenderAll, healAll, escapeHtml } from "./actions.js?v=5";
-import { readScene, runCommands } from "./layout.js?v=5";
-import { getCountdown, placeCountdown, stepCountdown, removeCountdown, TAKT_EVENTS, HERZ_KEY, HERZ_MAX } from "./finale.js?v=5";
-import { ID } from "./core.js?v=5";
-import { STACKS } from "./data.js?v=5";
-import { getSpiel, changeSpiel, resetSpiel, countdownStart, folgen, applyTags, countSaved } from "./state.js?v=5";
-import { moveBelt, resetBelt, stopHammer } from "./belt.js?v=5";
-import { hideOverlay, showOverlay } from "./show.js?v=5";
-import { makeRoll, playRoll } from "./dice.js?v=5";
-import { drinkShake, nameOfToken } from "./shake.js?v=5";
+import OBR from "./vendor/obr-sdk.js?v=6";
+import { WOUNDS_KEY, readState, stageFor, hearts, maxFor } from "./core.js?v=6";
+import { getSettings, setSettings, rerenderAll, healAll, escapeHtml } from "./actions.js?v=6";
+import { readScene, runCommands } from "./layout.js?v=6";
+import { getCountdown, placeCountdown, stepCountdown, removeCountdown, TAKT_EVENTS, HERZ_KEY, HERZ_MAX } from "./finale.js?v=6";
+import { ID } from "./core.js?v=6";
+import { STACKS } from "./data.js?v=6";
+import { getSpiel, changeSpiel, resetSpiel, countdownStart, folgen, applyTags, countSaved } from "./state.js?v=6";
+import { moveBelt, resetBelt, stopHammer } from "./belt.js?v=6";
+import { hideOverlay, showOverlay } from "./show.js?v=6";
+import { makeRoll, playRoll } from "./dice.js?v=6";
+import { playDong, playStamp } from "./sound.js?v=6";
+import { drinkShake, nameOfToken } from "./shake.js?v=6";
 
 const $ = (id) => document.getElementById(id);
 
@@ -40,13 +41,14 @@ async function render() {
 
   let html = wounded.map(({ c, s }) => {
     const n = s.list.length;
-    const st = stageFor(n, maxWounds);
+    const mx = maxFor(c, maxWounds);
+    const st = stageFor(n, mx);
     return `<div class="hero" style="border-left-color:${st.bg}">
       <div class="top">
         <span class="hname">${escapeHtml(c.text?.plainText || c.name || "Held")}</span>
         <span class="badge" style="background:${st.bg}">${st.label}</span>
       </div>
-      <div class="hearts" style="font-size:20px;margin-top:4px">${hearts(n, maxWounds)}</div>
+      <div class="hearts" style="font-size:20px;margin-top:4px">${hearts(n, mx)}</div>
       <ul>${s.list.map((w) => `<li>${escapeHtml(w.icon)} <b>${escapeHtml(w.name)}</b> <span class="eff">· ${escapeHtml(w.effect)}</span></li>`).join("")}</ul>
     </div>`;
   }).join("");
@@ -119,7 +121,7 @@ async function renderFinale() {
   }).join("") || '<div class="empty">Noch keine Herzpunkte vergeben.</div>';
 }
 const safe = (fn) => async () => { try { await fn(); } catch (e) { OBR.notification.show(String(e.message || e), "ERROR"); } renderFinale(); };
-$("cdMinus").addEventListener("click", safe(() => stepCountdown(-1)));
+$("cdMinus").addEventListener("click", safe(() => { playDong(); return stepCountdown(-1); }));
 $("cdPlus").addEventListener("click", safe(() => stepCountdown(1)));
 $("cdPlace").addEventListener("click", safe(() => placeCountdown(Number($("cdStart").value))));
 $("cdRemove").addEventListener("click", safe(() => removeCountdown()));
@@ -175,7 +177,11 @@ $("hammer").addEventListener("change", spielSafe(async (e) => {
 }));
 const beltSafe = (fn) => async (e) => {
   const btn = e.currentTarget; btn.disabled = true;
-  try { const r = await fn(); if (r && r.msg) $("beltMsg").textContent = r.msg; }
+  try {
+    const r = await fn();
+    if (r && r.crushed && r.crushed.length) playStamp();
+    if (r && r.msg) $("beltMsg").textContent = r.msg;
+  }
   catch (err) { $("beltMsg").textContent = "Fehler: " + (err.message || err); }
   btn.disabled = false; renderSpiel();
 };
@@ -243,7 +249,7 @@ OBR.onReady(() => { OBR.player.onChange(() => { if (!$("secD").hidden) renderWho
 const SZENE_KEY = `${ID}/szene`;
 let skript = null;
 async function loadSkript() {
-  if (!skript) skript = await (await fetch(new URL("assets/skript.json?v=5", location.href))).json();
+  if (!skript) skript = await (await fetch(new URL("assets/skript.json?v=6", location.href))).json();
   return skript;
 }
 async function renderSkript() {

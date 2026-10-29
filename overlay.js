@@ -1,6 +1,6 @@
-import OBR from "./vendor/obr-sdk.js?v=5";
-import { OV_MODAL } from "./show.js?v=5";
-import { SHAKES } from "./data.js?v=5";
+import OBR from "./vendor/obr-sdk.js?v=6";
+import { OV_MODAL } from "./show.js?v=6";
+import { SHAKES } from "./data.js?v=6";
 
 const stage = document.getElementById("stage");
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));

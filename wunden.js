@@ -1,6 +1,6 @@
-import OBR from "./vendor/obr-sdk.js?v=5";
-import { ID, CATALOG, readState, stageFor, hearts } from "./core.js?v=5";
-import { getSettings, addWound, healWound, setVariant, escapeHtml } from "./actions.js?v=5";
+import OBR from "./vendor/obr-sdk.js?v=6";
+import { ID, CATALOG, readState, stageFor, hearts, maxFor, MAX_KEY } from "./core.js?v=6";
+import { getSettings, addWound, healWound, setVariant, escapeHtml, mutateWounds } from "./actions.js?v=6";
 
 const tokenId = new URLSearchParams(location.search).get("id");
 const $ = (id) => document.getElementById(id);
@@ -18,7 +18,12 @@ async function run(fn) {
 async function render() {
   const [token] = await OBR.scene.items.getItems([tokenId]);
   if (!token) { $("name").textContent = "Token nicht gefunden"; return; }
-  const { maxWounds } = await getSettings();
+  const { maxWounds: globalMax } = await getSettings();
+  const maxWounds = maxFor(token, globalMax);
+  const own = token.metadata[MAX_KEY];
+  $("hmax").innerHTML = `<option value="">Standard (${maxFor({ ...token, metadata: {} }, globalMax)})</option>` +
+    [3, 4, 5, 6, 8, 10, 12, 15, 20, 30].map((n) => `<option value="${n}">${n}</option>`).join("");
+  $("hmax").value = Number.isFinite(own) ? String(own) : "";
   const state = readState(token.metadata);
   const count = state.list.length;
   const stage = stageFor(count, maxWounds);
@@ -77,6 +82,14 @@ document.addEventListener("click", (ev) => {
     $("cname").value = ""; $("ceffect").value = "";
     run(() => addWound([tokenId], { name, effect, icon: "🩸" }));
   }
+});
+
+$("hmax").addEventListener("change", (e) => {
+  const v = e.target.value;
+  run(() => mutateWounds([tokenId], (state, draft) => {
+    if (v === "") delete draft.metadata[MAX_KEY];
+    else draft.metadata[MAX_KEY] = Number(v);
+  }));
 });
 
 $("ceffect").addEventListener("keydown", (e) => { if (e.key === "Enter") $("cadd").click(); });

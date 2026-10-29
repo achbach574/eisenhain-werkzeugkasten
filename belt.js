@@ -1,10 +1,10 @@
 // Fließband in Szene 8: Stapel wandern Richtung Presse und werden dort zerquetscht.
-import OBR, { buildImage } from "./vendor/obr-sdk.js?v=5";
-import { ID } from "./core.js?v=5";
-import { BELT, STACKS, stackKeyOf } from "./data.js?v=5";
-import { findMap, applyTo } from "./layout.js?v=5";
-import { getSpiel, changeSpiel } from "./state.js?v=5";
-import { showOverlay } from "./show.js?v=5";
+import OBR from "./vendor/obr-sdk.js?v=6";
+import { ID } from "./core.js?v=6";
+import { BELT, STACKS, stackKeyOf } from "./data.js?v=6";
+import { findMap, applyTo } from "./layout.js?v=6";
+import { getSpiel, changeSpiel } from "./state.js?v=6";
+import { showOverlay } from "./show.js?v=6";
 
 export const BAND_KEY = `${ID}/band`;
 export const HAUFEN_KEY = `${ID}/haufen`;
@@ -12,7 +12,6 @@ const LAST = BELT.xs.length - 1;
 const STEP = BELT.xs[1] - BELT.xs[0];
 const PRESS_X = BELT.xs[LAST] + STEP;
 const SAFE_Y = BELT.y + 0.2;
-const asset = (p) => new URL(p, window.location.href).href;
 
 async function stackItems() {
   return OBR.scene.items.getItems((i) => i.type === "IMAGE" && Boolean(stackKeyOf(i)));
@@ -77,19 +76,8 @@ export async function moveBelt(dir = 1) {
 async function crush(item) {
   const key = stackKeyOf(item);
   await changeSpiel((s) => { s.stapel[key] = "verloren"; });
-  await place([{ id: item.id, x: PRESS_X, y: BELT.y, visible: false, feld: LAST + 1 }]);
-  // Haufen rosa Hanteln an der Presse
-  const { b: mb } = await findMap();
-  const sdpi = await OBR.scene.grid.getDpi();
-  const n = (await OBR.scene.items.getItems((i) => Boolean(i.metadata && i.metadata[HAUFEN_KEY]))).length;
-  const size = 512;
-  const img = buildImage({ url: asset("assets/rosa_haufen.png"), width: size, height: size, mime: "image/png" },
-    { dpi: size, offset: { x: size / 2, y: size / 2 } })
-    .layer("PROP").name(`Rosa Hanteln (${STACKS[key].short})`)
-    .metadata({ [HAUFEN_KEY]: { from: key } })
-    .build();
-  applyTo(img, { x: PRESS_X + 0.01 * (n % 3) - 0.01, y: BELT.y + 0.12 + 0.03 * n, h: 0.09 }, mb, sdpi);
-  await OBR.scene.items.addItems([img]);
+  // Weg vom Tisch: unsichtbar und weit neben die Karte, damit auch die Spielleitung ihn nicht mehr sieht.
+  await place([{ id: item.id, x: -40, y: -40, visible: false, feld: LAST + 1 }]);
   await showOverlay({ kind: "crush", title: "DONG!", text: `${STACKS[key].name} sind jetzt rosa Kurzhanteln.`, image: item.image.url });
 }
 

@@ -1,12 +1,12 @@
-import OBR from "./vendor/obr-sdk.js?v=5";
-import { ID, WOUNDS_KEY } from "./core.js?v=5";
-import { healWound } from "./actions.js?v=5";
-import { changeHerz, HERZ_KEY, CD_KEY } from "./finale.js?v=5";
-import { OV_CH, OV_MODAL } from "./show.js?v=5";
-import { goblinFor, GOBLIN_KEY } from "./data.js?v=5";
-import { BAND_KEY, tagStacks, saveStacks, returnStacks } from "./belt.js?v=5";
-import { SPIEL_KEY, applyTags } from "./state.js?v=5";
-import { SHAKE_KEY, drinkShake, removeShake } from "./shake.js?v=5";
+import OBR from "./vendor/obr-sdk.js?v=6";
+import { ID, WOUNDS_KEY } from "./core.js?v=6";
+import { healWound } from "./actions.js?v=6";
+import { changeHerz, HERZ_KEY, CD_KEY } from "./finale.js?v=6";
+import { OV_CH, OV_MODAL } from "./show.js?v=6";
+import { goblinFor, GOBLIN_KEY } from "./data.js?v=6";
+import { BAND_KEY, tagStacks, saveStacks, returnStacks } from "./belt.js?v=6";
+import { SPIEL_KEY, applyTags } from "./state.js?v=6";
+import { SHAKE_KEY, drinkShake, removeShake } from "./shake.js?v=6";
 
 const here = (p) => new URL(p, window.location.href).href;
 const GM = (extra = []) => ({ roles: ["GM"], every: extra });

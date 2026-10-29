@@ -1,6 +1,6 @@
 // Szenen-Baukasten: Tokens per Befehl relativ zur Karte platzieren.
 // Koordinaten: x/y = Mittelpunkt als Anteil der Karte (0 bis 1), h = Höhe als Anteil der Kartenhöhe, w = Breite als Anteil der Kartenbreite.
-import OBR, { buildImage } from "./vendor/obr-sdk.js?v=5";
+import OBR, { buildImage } from "./vendor/obr-sdk.js?v=6";
 
 const LAYERS = ["PROP", "MOUNT", "CHARACTER", "NOTE"];
 const nameOf = (i) => (i.name || "").trim();

@@ -1,5 +1,5 @@
-import OBR from "./vendor/obr-sdk.js?v=5";
-import { showOverlay, hideOverlay } from "./show.js?v=5";
+import OBR from "./vendor/obr-sdk.js?v=6";
+import { showOverlay, hideOverlay } from "./show.js?v=6";
 
 const $ = (id) => document.getElementById(id);
 const q = new URLSearchParams(location.search);

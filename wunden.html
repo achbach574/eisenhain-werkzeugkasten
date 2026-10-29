@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Wunden</title>
-  <link rel="stylesheet" href="./style.css?v=5">
+  <link rel="stylesheet" href="./style.css?v=6">
 </head>
 <body>
   <div class="row" style="justify-content:space-between;align-items:center">
@@ -14,6 +14,11 @@
   <div class="status">
     <span class="hearts" id="hearts"></span>
     <span class="badge" id="badge"></span>
+  </div>
+
+  <div class="row" style="align-items:center;margin-top:8px">
+    <label for="hmax" class="muted" style="flex:1">Herzen dieses Tokens</label>
+    <select id="hmax" style="width:150px"></select>
   </div>
 
   <h2>Aktuelle Wunden</h2>
@@ -29,6 +34,6 @@
     <button class="primary" id="cadd" style="flex:none">+</button>
   </div>
 
-  <script type="module" src="./wunden.js?v=5"></script>
+  <script type="module" src="./wunden.js?v=6"></script>
 </body>
 </html>

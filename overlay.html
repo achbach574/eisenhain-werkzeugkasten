@@ -48,13 +48,13 @@
   @keyframes appear { from { opacity: 0; transform: translateY(2vh) } }
 
   /* Shakes */
-  .cups { display: flex; gap: 2vh; }
-  .cup { width: 14vh; height: 18vh; border-radius: 1.6vh 1.6vh 4vh 4vh; background: linear-gradient(180deg,#3b2a1f,#20150f); border: .4vh solid #5a4330;
-         display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6vh; font-size: 7vh; transition: transform .1s, border-color .1s, box-shadow .1s; }
+  .cups { display: flex; gap: min(2vh, 1.4vw); }
+  .cup { width: min(14vh, 12.5vw); height: min(18vh, 16vw); border-radius: 1.6vh 1.6vh 4vh 4vh; background: linear-gradient(180deg,#3b2a1f,#20150f); border: .4vh solid #5a4330;
+         display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6vh; font-size: min(7vh, 6vw); transition: transform .1s, border-color .1s, box-shadow .1s; }
   .cup small { font-size: 2.2vh; font-family: "Cinzel", serif; color: #c9b597; }
   .cup.lit { border-color: #ffd34d; box-shadow: 0 0 4vh #ffb000; transform: translateY(-1.5vh) scale(1.08); }
   .cup.win { border-color: #ffd34d; box-shadow: 0 0 6vh #ffb000, inset 0 0 3vh rgba(255,200,80,.3); transform: translateY(-2.5vh) scale(1.18); }
-  .shname { font-size: 6vh; color: #ffd98a; text-shadow: 0 0 2vh #b0600088, 0 3px 8px #000; }
+  .shname { font-size: min(6vh, 5.5vw); color: #ffd98a; text-shadow: 0 0 2vh #b0600088, 0 3px 8px #000; }
 
   /* Handout */
   .handout { max-width: 86vw; max-height: 82vh; object-fit: contain; filter: drop-shadow(0 2vh 4vh rgba(0,0,0,.9)); animation: lift .45s cubic-bezier(.2,1.2,.4,1) both; }
@@ -76,6 +76,6 @@
 </head>
 <body>
 <div id="stage"></div>
-<script type="module" src="./overlay.js?v=5"></script>
+<script type="module" src="./overlay.js?v=6"></script>
 </body>
 </html>

@@ -1,11 +1,13 @@
-import OBR from "./vendor/obr-sdk.js?v=5";
-import { GOBLINS, GOBLIN_KEY, STACKS, stackKeyOf, goblinFor } from "./data.js?v=5";
-import { CATALOG } from "./core.js?v=5";
-import { addWound, escapeHtml } from "./actions.js?v=5";
-import { showOverlay } from "./show.js?v=5";
-import { moveBelt, returnStacks } from "./belt.js?v=5";
-import { getSpiel } from "./state.js?v=5";
-import { nameOfToken } from "./shake.js?v=5";
+import OBR from "./vendor/obr-sdk.js?v=6";
+import { GOBLINS, GOBLIN_KEY, STACKS, stackKeyOf, goblinFor } from "./data.js?v=6";
+import { CATALOG } from "./core.js?v=6";
+import { addWound, escapeHtml } from "./actions.js?v=6";
+import { showOverlay } from "./show.js?v=6";
+import { moveBelt, returnStacks } from "./belt.js?v=6";
+import { getSpiel } from "./state.js?v=6";
+import { nameOfToken } from "./shake.js?v=6";
+import { playStamp } from "./sound.js?v=6";
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const $ = (id) => document.getElementById(id);
 const id = new URLSearchParams(location.search).get("id");
@@ -62,7 +64,11 @@ async function init() {
         if (names) sub = `${a.text} (${names.join(", ")})`;
       }
       await showOverlay({ kind: "spruch", image: tok.image.url, text: g.spruch, sub });
-      if (a.belt === "vor") setTimeout(() => moveBelt(1), 5600);
+      if (a.belt === "vor") {
+        await sleep(5800);
+        const r = await moveBelt(1);
+        if (r.crushed.length) { playStamp(); await sleep(1500); }
+      }
       OBR.popover.close("eisenhain.werkzeugkasten/goblin-pop");
     } catch (err) {
       OBR.notification.show(String(err.message || err), "ERROR");

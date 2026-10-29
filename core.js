@@ -5,6 +5,20 @@ export const WOUNDS_KEY = `${ID}/wunden`;
 export const VISUAL_KEY = `${ID}/anzeige`;
 export const SETTINGS_KEY = `${ID}/einstellungen`;
 export const DEFAULT_SETTINGS = { maxWounds: 4 };
+export const MAX_KEY = `${ID}/herzen`;
+
+// Bosse halten mehr aus. Standard nach Name, im Wunden-Menü pro Token änderbar.
+export const NAME_DEFAULTS = [
+  { re: /karl/i, max: 12 },
+  { re: /rita/i, max: 5 },
+];
+export function maxFor(item, globalMax) {
+  const own = item && item.metadata && item.metadata[MAX_KEY];
+  if (Number.isFinite(own)) return own;
+  const n = ((item && item.name) || "") + " " + ((item && item.text && item.text.plainText) || "");
+  const d = NAME_DEFAULTS.find((x) => x.re.test(n));
+  return d ? d.max : globalMax;
+}
 
 // Wundenkatalog. Eigene Wunden lassen sich im Menü zusätzlich anlegen.
 export const CATALOG = [
@@ -36,6 +50,7 @@ export function stageFor(count, max) {
 
 export function hearts(count, max) {
   const left = Math.max(0, max - count);
+  if (max > 6) return `♥ ${left}/${max}`;
   return "♥".repeat(left) + "♡".repeat(Math.min(count, max));
 }
 

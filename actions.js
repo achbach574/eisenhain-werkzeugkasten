@@ -1,8 +1,8 @@
-import OBR, { buildShape, buildLabel } from "./vendor/obr-sdk.js?v=5";
+import OBR, { buildShape, buildLabel } from "./vendor/obr-sdk.js?v=6";
 import {
   WOUNDS_KEY, VISUAL_KEY, SETTINGS_KEY, DEFAULT_SETTINGS,
-  clampMax, stageFor, readState, labelText, makeWound, applyStateToToken,
-} from "./core.js?v=5";
+  clampMax, stageFor, readState, labelText, makeWound, applyStateToToken, maxFor,
+} from "./core.js?v=6";
 
 export async function getSettings() {
   const meta = await OBR.room.getMetadata();
@@ -27,7 +27,7 @@ export async function mutateWounds(tokenIds, mutate) {
     for (const draft of drafts) {
       const state = readState(draft.metadata);
       mutate(state, draft);
-      const clean = applyStateToToken(draft, state, maxWounds);
+      const clean = applyStateToToken(draft, state, maxFor(draft, maxWounds));
       if (clean.list.length === 0 && !clean.original && clean.prevRotation === undefined) {
         delete draft.metadata[WOUNDS_KEY];
       } else {
@@ -79,7 +79,8 @@ export async function renderVisuals(tokenIds) {
     const state = readState(t.metadata);
     const count = state.list.length;
     if (!count) continue;
-    const stage = stageFor(count, maxWounds);
+    const max = maxFor(t, maxWounds);
+    const stage = stageFor(count, max);
     const b = await OBR.scene.items.getItemBounds([t.id]);
     const meta = (kind) => ({ [VISUAL_KEY]: { owner: t.id, kind } });
     // Stehende Figur (hochkant): flacher Ring an den Füßen. Sonst: Ring um das Token.
@@ -122,7 +123,7 @@ export async function renderVisuals(tokenIds) {
 
     toAdd.push(
       buildLabel()
-        .plainText(labelText(state, maxWounds))
+        .plainText(labelText(state, max))
         .position({ x: b.center.x, y: b.max.y + fs * 0.3 })
         .pointerDirection("UP")
         .pointerHeight(fs * 0.3)
@@ -159,7 +160,7 @@ export async function rerenderAll() {
   // Liegen und Bild an die neue Grenze anpassen
   await OBR.scene.items.updateItems(ids, (drafts) => {
     for (const d of drafts) {
-      const s = applyStateToToken(d, readState(d.metadata), maxWounds);
+      const s = applyStateToToken(d, readState(d.metadata), maxFor(d, maxWounds));
       d.metadata[WOUNDS_KEY] = s;
     }
   });

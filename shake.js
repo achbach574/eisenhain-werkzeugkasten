@@ -1,8 +1,8 @@
 // Shake-Roulette: W6 entscheidet, welcher Shake aus Madame Makros Bar wirkt.
-import OBR, { buildLabel } from "./vendor/obr-sdk.js?v=5";
-import { ID } from "./core.js?v=5";
-import { SHAKES } from "./data.js?v=5";
-import { showOverlay } from "./show.js?v=5";
+import OBR, { buildLabel } from "./vendor/obr-sdk.js?v=6";
+import { ID } from "./core.js?v=6";
+import { SHAKES } from "./data.js?v=6";
+import { showOverlay } from "./show.js?v=6";
 
 export const SHAKE_KEY = `${ID}/shake`;
 export const SHAKE_VIS_KEY = `${ID}/shakeanzeige`;

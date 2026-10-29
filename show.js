@@ -1,6 +1,6 @@
 // Großanzeige auf dem Fernseher: Nachricht an alle, der Hintergrund öffnet das Overlay.
-import OBR from "./vendor/obr-sdk.js?v=5";
-import { ID } from "./core.js?v=5";
+import OBR from "./vendor/obr-sdk.js?v=6";
+import { ID } from "./core.js?v=6";
 
 export const OV_CH = `${ID}/overlay`;
 export const OV_MODAL = `${ID}/overlay-modal`;

@@ -53,3 +53,11 @@ Rechtsklick auf einen Goblin: „Goblin-Aktionen“ mit Spruch, Aktion und Wunde
 Rechtsklick auf einen Helden: „Shake trinken (W6)“.
 Rechtsklick auf ein Handout (Ebene Prop): „Auf dem Fernseher zeigen“. Tagebuch 1 bis 4
   werden automatisch zu einem Heft zum Umblättern.
+
+NEU IN VERSION 2.1
+==================
+Töne: „Dong! −1“ im Finale schlägt eine tiefe Glocke, der Stampfhammer kracht,
+  wenn ein Stapel zerquetscht wird. Der Ton kommt aus dem Gerät, auf dem du klickst.
+Herzen pro Token: Karl hat von selbst 12 Herzen, Rita 5. Im Wunden-Menü kannst du
+  bei jedem Token unter „Herzen dieses Tokens“ eine eigene Zahl einstellen.
+Zerquetschte Stapel verschwinden ganz vom Tisch. „Band neu aufbauen“ holt sie zurück.

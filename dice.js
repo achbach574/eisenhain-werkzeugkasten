@@ -1,5 +1,5 @@
 // Würfel des Eisenhain: Wurf, Bewertung und Eisenklang.
-import { rollD } from "./shake.js?v=5";
+import { rollD } from "./shake.js?v=6";
 
 export const DCS = { 0: "ohne Schwierigkeit", 8: "Leicht (8)", 12: "Normal (12)", 16: "Schwer (16)", 20: "Heldentat (20)" };
 
@@ -33,13 +33,13 @@ export function makeRoll({ sides = 20, mode = "normal", count = 1, mod = 0, dc =
 }
 
 let ctx = null;
-function ac() {
+export function ac() {
   if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
   if (ctx.state === "suspended") ctx.resume();
   return ctx;
 }
 
-function clank(c, at, gain = 0.5, base = 180) {
+export function clank(c, at, gain = 0.5, base = 180) {
   // Inharmonische Teiltöne wie bei einer angeschlagenen Hantelscheibe
   const partials = [1, 2.76, 5.4, 8.93, 13.3];
   const out = c.createGain();
