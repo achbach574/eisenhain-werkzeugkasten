@@ -1,5 +1,5 @@
 // Würfel des Eisenhain: Wurf, Bewertung und Eisenklang.
-import { rollD } from "./shake.js?v=6";
+import { rollD } from "./shake.js?v=7";
 
 export const DCS = { 0: "ohne Schwierigkeit", 8: "Leicht (8)", 12: "Normal (12)", 16: "Schwer (16)", 20: "Heldentat (20)" };
 

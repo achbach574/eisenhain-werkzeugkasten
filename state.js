@@ -1,7 +1,7 @@
 // Spielstand: Was die Helden bisher geschafft haben, und was daraus folgt.
-import OBR from "./vendor/obr-sdk.js?v=6";
-import { ID } from "./core.js?v=6";
-import { STACKS } from "./data.js?v=6";
+import OBR from "./vendor/obr-sdk.js?v=7";
+import { ID } from "./core.js?v=7";
+import { STACKS } from "./data.js?v=7";
 
 export const SPIEL_KEY = `${ID}/spielstand`;
 

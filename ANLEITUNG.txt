@@ -61,3 +61,11 @@ Töne: „Dong! −1“ im Finale schlägt eine tiefe Glocke, der Stampfhammer k
 Herzen pro Token: Karl hat von selbst 12 Herzen, Rita 5. Im Wunden-Menü kannst du
   bei jedem Token unter „Herzen dieses Tokens“ eine eigene Zahl einstellen.
 Zerquetschte Stapel verschwinden ganz vom Tisch. „Band neu aufbauen“ holt sie zurück.
+
+NEU IN VERSION 2.2
+==================
+Reiter „Skript“: Undertale-Musik, neue Stationen in Szene 12 und die Playlist.
+Reiter „Finale“, ganz unten: „Volle Karte bereitlegen“ legt die volle Gym-Karte
+  unsichtbar weit neben die leere. „Das Gym erstrahlt!“ legt sie genau über die leere,
+  spielt einen hellen Gong und zeigt die Nachricht groß auf dem Fernseher.
+  Die volle Karte muss auf der Ebene Map liegen und „voll“ im Namen haben.

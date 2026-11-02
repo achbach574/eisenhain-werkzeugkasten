@@ -70,12 +70,13 @@
   .bubble::after { content: ""; position: absolute; left: -3.6vh; bottom: 3vh; border: 2vh solid transparent; border-right: 3.6vh solid #1d120b; }
   @keyframes pop { from { transform: scale(0); opacity: 0 } }
   .event-title { font-size: 11vh; color: #ff7a4d; text-shadow: 0 0 3vh #a32000, 0 .6vh 0 #2a0b00; animation: slam .45s cubic-bezier(.2,1.6,.4,1) both; }
+  .event-title.gold { color: #ffd34d; font-size: 8vh; text-shadow: 0 0 3vh #ff9d00, 0 0 8vh #b06a00, 0 .5vh 0 #3a2400; }
   .event-img { height: 26vh; filter: grayscale(.3) drop-shadow(0 2vh 3vh #000); animation: squash .7s .2s ease-in both; }
   @keyframes squash { 60% { transform: scaleY(1) } 75% { transform: scaleY(.25) scaleX(1.4); filter: hue-rotate(-40deg) saturate(3) brightness(1.3) } 100% { transform: scaleY(.25) scaleX(1.4); opacity: .0 } }
 </style>
 </head>
 <body>
 <div id="stage"></div>
-<script type="module" src="./overlay.js?v=6"></script>
+<script type="module" src="./overlay.js?v=7"></script>
 </body>
 </html>

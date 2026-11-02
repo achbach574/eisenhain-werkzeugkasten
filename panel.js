@@ -1,16 +1,17 @@
-import OBR from "./vendor/obr-sdk.js?v=6";
-import { WOUNDS_KEY, readState, stageFor, hearts, maxFor } from "./core.js?v=6";
-import { getSettings, setSettings, rerenderAll, healAll, escapeHtml } from "./actions.js?v=6";
-import { readScene, runCommands } from "./layout.js?v=6";
-import { getCountdown, placeCountdown, stepCountdown, removeCountdown, TAKT_EVENTS, HERZ_KEY, HERZ_MAX } from "./finale.js?v=6";
-import { ID } from "./core.js?v=6";
-import { STACKS } from "./data.js?v=6";
-import { getSpiel, changeSpiel, resetSpiel, countdownStart, folgen, applyTags, countSaved } from "./state.js?v=6";
-import { moveBelt, resetBelt, stopHammer } from "./belt.js?v=6";
-import { hideOverlay, showOverlay } from "./show.js?v=6";
-import { makeRoll, playRoll } from "./dice.js?v=6";
-import { playDong, playStamp } from "./sound.js?v=6";
-import { drinkShake, nameOfToken } from "./shake.js?v=6";
+import OBR from "./vendor/obr-sdk.js?v=7";
+import { WOUNDS_KEY, readState, stageFor, hearts, maxFor } from "./core.js?v=7";
+import { getSettings, setSettings, rerenderAll, healAll, escapeHtml } from "./actions.js?v=7";
+import { readScene, runCommands } from "./layout.js?v=7";
+import { getCountdown, placeCountdown, stepCountdown, removeCountdown, TAKT_EVENTS, HERZ_KEY, HERZ_MAX } from "./finale.js?v=7";
+import { ID } from "./core.js?v=7";
+import { STACKS } from "./data.js?v=7";
+import { getSpiel, changeSpiel, resetSpiel, countdownStart, folgen, applyTags, countSaved } from "./state.js?v=7";
+import { moveBelt, resetBelt, stopHammer } from "./belt.js?v=7";
+import { hideOverlay, showOverlay } from "./show.js?v=7";
+import { makeRoll, playRoll } from "./dice.js?v=7";
+import { playDong, playStamp, playGlory } from "./sound.js?v=7";
+import { prepareGym, revealGym } from "./epilog.js?v=7";
+import { drinkShake, nameOfToken } from "./shake.js?v=7";
 
 const $ = (id) => document.getElementById(id);
 
@@ -249,7 +250,7 @@ OBR.onReady(() => { OBR.player.onChange(() => { if (!$("secD").hidden) renderWho
 const SZENE_KEY = `${ID}/szene`;
 let skript = null;
 async function loadSkript() {
-  if (!skript) skript = await (await fetch(new URL("assets/skript.json?v=6", location.href))).json();
+  if (!skript) skript = await (await fetch(new URL("assets/skript.json?v=7", location.href))).json();
   return skript;
 }
 async function renderSkript() {
@@ -279,3 +280,7 @@ $("kChips").addEventListener("click", (e) => {
 });
 $("kBig").addEventListener("click", () => $("kBody").classList.toggle("big"));
 OBR.onReady(() => { OBR.scene.onReadyChange(() => { if (!$("secK").hidden) renderSkript(); }); });
+
+// ---- Epilog ----
+$("gymPrep").addEventListener("click", safe(async () => { await prepareGym(); OBR.notification.show("Die volle Karte liegt unsichtbar bereit."); }));
+$("gymShow").addEventListener("click", safe(async () => { playGlory(); await revealGym(); }));

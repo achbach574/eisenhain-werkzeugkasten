@@ -1,7 +1,7 @@
 // Finale: Countdown-Scheibe und Herzpunkte.
-import OBR, { buildImage } from "./vendor/obr-sdk.js?v=6";
-import { ID } from "./core.js?v=6";
-import { findMap } from "./layout.js?v=6";
+import OBR, { buildImage } from "./vendor/obr-sdk.js?v=7";
+import { ID } from "./core.js?v=7";
+import { findMap } from "./layout.js?v=7";
 
 export const CD_KEY = `${ID}/countdown`;
 export const HERZ_KEY = `${ID}/herzpunkte`;

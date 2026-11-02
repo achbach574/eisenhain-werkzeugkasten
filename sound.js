@@ -1,5 +1,5 @@
 // Geräusche für den Fernseher, erzeugt im Browser (keine Audiodateien nötig).
-import { ac, clank } from "./dice.js?v=6";
+import { ac, clank } from "./dice.js?v=7";
 
 function noise(c, at, dur, gain, filterType, freq, q = 1) {
   const len = Math.floor(c.sampleRate * dur);
@@ -66,5 +66,25 @@ export function playStamp() {
     noise(c, hit + 0.35, 1.4, 0.18, "highpass", 4000);     // Dampf zischt
     // rosa Hanteln klimpern in die Kiste
     for (let i = 0; i < 7; i++) clank(c, hit + 0.6 + i * 0.09 + Math.random() * 0.04, 0.05, 1400 + Math.random() * 800);
+  } catch (e) { /* ohne Ton weiter */ }
+}
+
+/** Heller Gong mit Dur-Akkord: das Gym erstrahlt. */
+export function playGlory() {
+  try {
+    const c = ac();
+    const t = c.currentTime + 0.02;
+    boom(c, t, 0.7, 70, 40, 1.5);
+    [[131, 0], [165, 0.25], [196, 0.5], [262, 0.75]].forEach(([f, dt]) => {
+      for (const [m, g, dur] of [[1, 0.35, 5], [2.01, 0.18, 3.5], [3.01, 0.1, 2.5]]) {
+        const o = c.createOscillator(), gn = c.createGain();
+        o.type = "sine"; o.frequency.value = f * m;
+        gn.gain.setValueAtTime(0, t + dt);
+        gn.gain.linearRampToValueAtTime(g, t + dt + 0.02);
+        gn.gain.exponentialRampToValueAtTime(0.0005, t + dt + dur);
+        o.connect(gn).connect(c.destination);
+        o.start(t + dt); o.stop(t + dt + dur + 0.1);
+      }
+    });
   } catch (e) { /* ohne Ton weiter */ }
 }

@@ -1,12 +1,12 @@
-import OBR from "./vendor/obr-sdk.js?v=6";
-import { GOBLINS, GOBLIN_KEY, STACKS, stackKeyOf, goblinFor } from "./data.js?v=6";
-import { CATALOG } from "./core.js?v=6";
-import { addWound, escapeHtml } from "./actions.js?v=6";
-import { showOverlay } from "./show.js?v=6";
-import { moveBelt, returnStacks } from "./belt.js?v=6";
-import { getSpiel } from "./state.js?v=6";
-import { nameOfToken } from "./shake.js?v=6";
-import { playStamp } from "./sound.js?v=6";
+import OBR from "./vendor/obr-sdk.js?v=7";
+import { GOBLINS, GOBLIN_KEY, STACKS, stackKeyOf, goblinFor } from "./data.js?v=7";
+import { CATALOG } from "./core.js?v=7";
+import { addWound, escapeHtml } from "./actions.js?v=7";
+import { showOverlay } from "./show.js?v=7";
+import { moveBelt, returnStacks } from "./belt.js?v=7";
+import { getSpiel } from "./state.js?v=7";
+import { nameOfToken } from "./shake.js?v=7";
+import { playStamp } from "./sound.js?v=7";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const $ = (id) => document.getElementById(id);

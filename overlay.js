@@ -1,6 +1,6 @@
-import OBR from "./vendor/obr-sdk.js?v=6";
-import { OV_MODAL } from "./show.js?v=6";
-import { SHAKES } from "./data.js?v=6";
+import OBR from "./vendor/obr-sdk.js?v=7";
+import { OV_MODAL } from "./show.js?v=7";
+import { SHAKES } from "./data.js?v=7";
 
 const stage = document.getElementById("stage");
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -157,16 +157,17 @@ function renderSpruch(d) {
     ${d.image ? `<img src="${esc(d.image)}" alt="">` : ""}
     <div class="bubble">${esc(d.text)}</div></div>
     ${d.sub ? `<div class="sub appear">${esc(d.sub)}</div>` : ""}</div>`;
-  closeIn(5500);
+  closeIn(d.kind === "glory" ? 9000 : 5500);
 }
 
 function renderEvent(d) {
   stage.innerHTML = `<div class="veil"></div><div class="content">
     ${d.image ? `<img class="event-img" src="${esc(d.image)}" alt="">` : ""}
-    <div class="event-title cin">${esc(d.title)}</div>
+    <div class="event-title cin${d.kind === "glory" ? " gold" : ""}">${esc(d.title)}</div>
     <div class="sub appear">${esc(d.text)}</div></div>`;
   if (d.kind === "crush") sparks("#ff8ad8");
-  closeIn(5500);
+  if (d.kind === "glory") sparks("#ffd34d");
+  closeIn(d.kind === "glory" ? 9000 : 5500);
 }
 
 function render() {

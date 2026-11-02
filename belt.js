@@ -1,10 +1,10 @@
 // Fließband in Szene 8: Stapel wandern Richtung Presse und werden dort zerquetscht.
-import OBR from "./vendor/obr-sdk.js?v=6";
-import { ID } from "./core.js?v=6";
-import { BELT, STACKS, stackKeyOf } from "./data.js?v=6";
-import { findMap, applyTo } from "./layout.js?v=6";
-import { getSpiel, changeSpiel } from "./state.js?v=6";
-import { showOverlay } from "./show.js?v=6";
+import OBR from "./vendor/obr-sdk.js?v=7";
+import { ID } from "./core.js?v=7";
+import { BELT, STACKS, stackKeyOf } from "./data.js?v=7";
+import { findMap, applyTo } from "./layout.js?v=7";
+import { getSpiel, changeSpiel } from "./state.js?v=7";
+import { showOverlay } from "./show.js?v=7";
 
 export const BAND_KEY = `${ID}/band`;
 export const HAUFEN_KEY = `${ID}/haufen`;
