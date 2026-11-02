@@ -6,14 +6,15 @@ const isFull = (i) => /voll/i.test(i.name || "");
 
 async function maps() {
   const all = await OBR.scene.items.getItems((i) => i.layer === "MAP" && i.type === "IMAGE");
-  const full = all.find(isFull);
+  if (all.length < 2) throw new Error("In dieser Szene braucht es zwei Karten: das leere und das volle Gym.");
+  let full = all.find(isFull);
+  // Ohne „voll“ im Namen gilt die oberste Karte als die volle (sie wurde zuletzt hineingezogen).
+  if (!full) full = [...all].sort((a, b) => (b.zIndex || 0) - (a.zIndex || 0))[0];
   let empty = null, area = -1, eb = null;
-  for (const m of all.filter((i) => !isFull(i))) {
+  for (const m of all.filter((i) => i.id !== full.id)) {
     const b = await OBR.scene.items.getItemBounds([m.id]);
     if (b.width * b.height > area) { area = b.width * b.height; empty = m; eb = b; }
   }
-  if (!full) throw new Error("Keine volle Gym-Karte gefunden. Ihr Name muss „voll“ enthalten.");
-  if (!empty) throw new Error("Keine leere Gym-Karte gefunden.");
   return { full, empty, eb };
 }
 
